@@ -8,7 +8,7 @@ function resolve(dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  devtool: isProd ? 'source-map' : '#cheap-module-source-map',
+  devtool: isProd ? false : '#cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
