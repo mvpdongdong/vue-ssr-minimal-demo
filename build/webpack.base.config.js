@@ -56,13 +56,29 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
-        use: ['vue-style-loader', 'css-loader', 'sass-loader']
+        test: /\.(css|scss)$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !isProd
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !isProd
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !isProd
+            }
+          }
+        ]
       },
-      {
-        test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
-      }
     ]
   },
   plugins: [new VueLoaderPlugin()]
