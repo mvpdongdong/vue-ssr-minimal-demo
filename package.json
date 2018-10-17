@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "express": "^4.16.3",
+    "nprogress": "^0.2.0",
     "route-cache": "^0.4.4",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",

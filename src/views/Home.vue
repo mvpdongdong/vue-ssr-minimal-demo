@@ -1,5 +1,6 @@
 <template>
   <div>
+    <demo></demo>
     <h3>文章列表</h3>
     <div class="list" v-for="i in list">
       <router-link :to="{path:'/item/'+i.id}">{{i.title}}</router-link>
@@ -7,6 +8,7 @@
   </div>
 </template>
 <script>
+import Demo from '../component/demo';
 export default {
   asyncData ({store, route}){
     return store.dispatch('fetchList')
@@ -20,11 +22,14 @@ export default {
     return {
       name:'wfz'
     }
+  },
+  components: {
+    Demo
   }
 }
 </script>
-<style lang="scss">
-body {
+<style scoped lang="scss">
+body h3 {
   color: #333;
 }
 </style>

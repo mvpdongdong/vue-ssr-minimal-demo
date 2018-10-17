@@ -24,3 +24,8 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+body h2 {
+  color: #e43;
+}
+</style>

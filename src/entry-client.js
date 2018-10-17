@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import { createApp } from './app';
 const { app, router, store } = createApp();
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css'; // Progress 进度条样式
 
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__);
@@ -22,6 +24,7 @@ Vue.mixin({
 })
 
 router.onReady(() => {
+  // 使用 `router.beforeResolve()`，以便确保所有异步组件都 resolve。
   router.beforeResolve((to, from, next) => {
     const matched = router.getMatchedComponents(to);
     const prevMatched = router.getMatchedComponents(from);
@@ -35,6 +38,9 @@ router.onReady(() => {
       return next();
     }
 
+    // 这里如果有加载指示器(loading indicator)，就触发
+    NProgress.start();
+
     Promise.all(
       activated.map(component => {
         if (component.asyncData) {
@@ -46,6 +52,8 @@ router.onReady(() => {
       })
     )
       .then(() => {
+        // 停止加载指示器(loading indicator)
+        NProgress.done();
         next();
       })
       .catch(next);
