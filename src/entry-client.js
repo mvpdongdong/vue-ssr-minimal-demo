@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import { createApp } from './app';
 const { app, router, store } = createApp();
 import NProgress from 'nprogress';
@@ -11,17 +11,17 @@ if (window.__INITIAL_STATE__) {
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
   beforeRouteUpdate (to, from, next) {
-    const { asyncData } = this.$options
+    const { asyncData } = this.$options;
     if (asyncData) {
       asyncData({
         store: this.$store,
         route: to
-      }).then(next).catch(next)
+      }).then(next).catch(next);
     } else {
-      next()
+      next();
     }
   }
-})
+});
 
 router.onReady(() => {
   // 使用 `router.beforeResolve()`，以便确保所有异步组件都 resolve。
@@ -30,9 +30,7 @@ router.onReady(() => {
     const prevMatched = router.getMatchedComponents(from);
 
     let diffed = false;
-    const activated = matched.filter((c, i) => {
-      return diffed || (diffed = prevMatched[i] !== c);
-    });
+    const activated = matched.filter((c, i) => diffed || (diffed = prevMatched[i] !== c));
 
     if (!activated.length) {
       return next();
@@ -42,7 +40,7 @@ router.onReady(() => {
     NProgress.start();
 
     Promise.all(
-      activated.map(component => {
+      activated.map((component) => {
         if (component.asyncData) {
           component.asyncData({
             store,

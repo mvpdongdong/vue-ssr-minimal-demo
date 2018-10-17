@@ -12,17 +12,17 @@
 <script>
 export default {
   asyncData ({ store, route }) {
-    return store.dispatch('fetchItem', route.params.id)
+    return store.dispatch('fetchItem', route.params.id);
   },
   computed: {
     item () {
-      return this.$store.state.items[this.$route.params.id]
+      return this.$store.state.items[this.$route.params.id];
     }
   },
   mounted () {
-    console.log('item logeed')
+    console.log('item logeed');
   }
-}
+};
 </script>
 <style scoped lang="scss">
 body h2 {

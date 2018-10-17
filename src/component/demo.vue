@@ -15,7 +15,7 @@ export default {
       items: this.$store.state.list
     };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

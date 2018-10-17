@@ -10,23 +10,23 @@
 <script>
 import Demo from '../component/demo';
 export default {
-  asyncData ({store, route}){
-    return store.dispatch('fetchList')
+  asyncData ({ store, route }) {
+    return store.dispatch('fetchList');
   },
   computed: {
     list () {
-      return this.$store.state.list
+      return this.$store.state.list;
     }
   },
-  data(){
+  data () {
     return {
-      name:'wfz'
-    }
+      name: 'wfz'
+    };
   },
   components: {
     Demo
   }
-}
+};
 </script>
 <style scoped lang="scss">
 body h3 {
