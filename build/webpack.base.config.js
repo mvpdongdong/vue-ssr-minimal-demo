@@ -1,9 +1,9 @@
-const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
-const isProd = process.env.NODE_ENV === 'production'
+const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
+const isProd = process.env.NODE_ENV === 'production';
 
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
+function resolve (dir) {
+  return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
@@ -66,4 +66,4 @@ module.exports = {
     ]
   },
   plugins: [new VueLoaderPlugin()]
-}
+};
