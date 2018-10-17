@@ -7,6 +7,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  mode: isProd ? 'production' : 'development',
   context: path.resolve(__dirname, '../'),
   devtool: isProd ? false : '#cheap-module-source-map',
   output: {
