@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import Demo from '../component/demo';
+import Demo from '../components/demo';
 export default {
   asyncData ({ store, route }) {
     return store.dispatch('fetchList');

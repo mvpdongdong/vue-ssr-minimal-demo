@@ -1,10 +1,10 @@
-const webpack = require('webpack')
-const merge = require('webpack-merge')
-const base = require('./webpack.base.config')
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-const isProd = process.env.NODE_ENV === 'production'
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const base = require('./webpack.base.config');
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const isProd = process.env.NODE_ENV === 'production';
 
 const config = merge(base, {
   entry: {
@@ -20,7 +20,7 @@ const config = merge(base, {
     }),
     new VueSSRClientPlugin()
   ]
-})
+});
 
 if (isProd) {
   config.optimization = {
@@ -61,7 +61,7 @@ if (isProd) {
       })
     ],
     hashedModuleIds: true
-  }
+  };
 }
 
-module.exports = config
+module.exports = config;
