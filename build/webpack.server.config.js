@@ -13,7 +13,7 @@ module.exports = merge(base, {
   },
   resolve: {},
   externals: nodeExternals({
-    whitelist: /\.css$/ // 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖
+    whitelist: /\.css$/ // 请注意，在 externals 选项中，我们将 CSS 文件列入白名单。这是因为从依赖模块导入的 CSS 还应该由 webpack 处理。如果你导入依赖于 webpack 的任何其他类型的文件（例如 *.vue, *.sass），那么你也应该将它们添加到白名单中。
   }),
   plugins: [
     new webpack.DefinePlugin({
