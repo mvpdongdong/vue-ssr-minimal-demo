@@ -3,6 +3,8 @@ const path = require('path');
 const express = require('express');
 const LRU = require('lru-cache');
 const microcache = require('route-cache');
+const morgan = require('morgan');
+const logger = morgan('dev');
 
 const { createBundleRenderer } = require('vue-server-renderer');
 const devServer = require('./build/setup-dev-server');
@@ -49,6 +51,13 @@ if (isProd) {
   );
 }
 
+app.get('*', function (req, res, next) {
+  logger(req, res, function (err) {
+    if (err) next(err);
+    next();
+  });
+});
+
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res));
 });
@@ -74,7 +83,6 @@ function createRenderer (bundle, options) {
 }
 
 function render (req, res) {
-  const startTime = Date.now();
   res.setHeader('Content-Type', 'text/html');
 
   const handleError = (err) => {
@@ -89,7 +97,7 @@ function render (req, res) {
   };
 
   const context = {
-    title: 'SSR 测试', // default title
+    title: 'Vue SSR', // default title
     url: req.url
   };
   renderer.renderToString(context, (err, html) => {
@@ -97,8 +105,5 @@ function render (req, res) {
       return handleError(err);
     }
     res.send(html);
-    if (!isProd) {
-      console.log(`whole request: ${Date.now() - startTime}ms`);
-    }
   });
 }
