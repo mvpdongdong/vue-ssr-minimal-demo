@@ -58,3 +58,12 @@ router.onReady(() => {
   });
   app.$mount('#app');
 });
+
+// service worker
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/service-worker.js').then(() => {
+    console.log('Service worker registered!');
+  }).catch((err) => {
+    console.log('error:', err);
+  });
+}

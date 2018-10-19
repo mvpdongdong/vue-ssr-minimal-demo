@@ -12,7 +12,7 @@ module.exports = {
   devtool: isProd ? false : '#cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/dist/',
+    publicPath: 'http://localhost:9003/',
     filename: '[name].[chunkhash].js'
   },
   resolve: {

@@ -4,6 +4,7 @@ const base = require('./webpack.base.config');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const SWPrecachePlugin = require('sw-precache-webpack-plugin');
 const isProd = process.env.NODE_ENV === 'production';
 
 const config = merge(base, {
@@ -21,6 +22,17 @@ const config = merge(base, {
     new VueSSRClientPlugin()
   ]
 });
+
+config.plugins.push(
+  // auto generate service worker
+  new SWPrecachePlugin({
+    cacheId: 'vue-ssr',
+    filename: 'service-worker.js',
+    minify: true,
+    dontCacheBustUrlsMatching: /\.\w{8}\./,
+    staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/]
+  })
+);
 
 if (isProd) {
   config.optimization = {
