@@ -1,4 +1,5 @@
 import { createApp } from './app';
+import cookieBus from './utils/cookieBus';
 
 export default (context) =>
   // 因为有可能会是异步路由钩子函数或组件，所以我们将返回一个 Promise，
@@ -6,6 +7,7 @@ export default (context) =>
   // 就已经准备就绪。
   new Promise((resolve, reject) => {
     const { app, router, store } = createApp(context);
+    cookieBus.$cookie = context.cookie;
 
     // 设置服务器端 router 的位置
     router.push(context.url);
@@ -37,6 +39,9 @@ export default (context) =>
         context.state = store.state;
         // Promise 应该 resolve 应用程序实例，以便它可以渲染
         resolve(app);
+      }).catch((err) => {
+        console.log('rendererror','entry-server',err);
+        return reject({ code: 500 });
       });
     });
   })

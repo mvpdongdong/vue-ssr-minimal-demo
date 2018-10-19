@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const LRU = require('lru-cache');
 const microcache = require('route-cache');
 const morgan = require('morgan');
@@ -20,6 +22,9 @@ const serve = (path, cache) =>
     maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
   });
 app.use('/dist', serve('./dist', true));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // since this app has no user-specific content, every page is micro-cacheable.
 // if your app involves user-specific content, you need to implement custom
@@ -98,7 +103,8 @@ function render (req, res) {
 
   const context = {
     title: 'Vue SSR', // default title
-    url: req.url
+    url: req.url,
+    cookie: req.headers['cookie']
   };
   renderer.renderToString(context, (err, html) => {
     if (err) {

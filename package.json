@@ -17,9 +17,12 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "morgan": "^1.9.1",
     "nprogress": "^0.2.0",
+    "querystring": "^0.2.0",
     "route-cache": "^0.4.4",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",

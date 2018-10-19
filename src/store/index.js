@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { fetchItem, fetchList } from '../api.js';
+import { fetchItem, fetchList } from '../api/index.js';
 
 Vue.use(Vuex);
 
@@ -13,13 +13,13 @@ export function createStore () {
     actions: {
       fetchItem ({ commit }, id) {
         return fetchItem(id).then((res) => {
-          commit('setItem', { id, item: res.data });
-        });
+          commit('setItem', { id, item: res });
+        }).catch((err) => console.log(err));
       },
       fetchList ({ commit }) {
         return fetchList().then((res) => {
-          commit('setList', res.data.list);
-        });
+          commit('setList', res.list);
+        }).catch((err) => console.log(err));
       }
     },
     mutations: {
