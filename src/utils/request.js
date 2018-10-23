@@ -1,6 +1,5 @@
 import axios from 'axios';
 import qs from 'querystring';
-import cookieBus from './cookieBus';
 
 const baseURL = 'https://api.mimei.net.cn';
 const isServer = process.env.VUE_ENV === 'server';
@@ -45,9 +44,9 @@ export function axiosPost (opts) {
     method: 'post',
     data: data
   };
-  if (isServer) {
-    config.headers = config.headers || {};
-    config.headers.cookie = cookieBus.$cookie;
+  config.headers = config.headers || {};
+  if (opts.cookie && isServer) {
+    config.headers.cookie = opts.cookie;
   }
   return service(config);
 }
@@ -59,9 +58,9 @@ export function axiosGet (opts) {
     method: 'get',
     params
   };
-  if (isServer) {
-    config.headers = config.headers || {};
-    config.headers.cookie = cookieBus.$cookie;
+  config.headers = config.headers || {};
+  if (opts.cookie && isServer) {
+    config.headers.cookie = opts.cookie;
   }
   return service(config);
 }

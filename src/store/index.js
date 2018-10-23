@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { fetchItem, fetchList } from '../api/index.js';
+import fooModule from './modules/foo';
 
 Vue.use(Vuex);
 
@@ -11,13 +12,13 @@ export function createStore () {
       list: []
     },
     actions: {
-      fetchItem ({ commit }, id) {
-        return fetchItem(id).then((res) => {
-          commit('setItem', { id, item: res });
+      fetchItem ({ commit }, config) {
+        return fetchItem(config).then((res) => {
+          commit('setItem', { id: config.params.id, item: res });
         }).catch((err) => console.log(err));
       },
-      fetchList ({ commit }) {
-        return fetchList().then((res) => {
+      fetchList ({ commit }, config) {
+        return fetchList(config).then((res) => {
           commit('setList', res.list);
         }).catch((err) => console.log(err));
       }
@@ -29,6 +30,9 @@ export function createStore () {
       setList (state, list) {
         state.list = list;
       }
+    },
+    modules: {
+      foo: fooModule
     }
   });
 }

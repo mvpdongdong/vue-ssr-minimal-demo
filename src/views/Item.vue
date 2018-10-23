@@ -10,8 +10,11 @@
 </template>
 <script>
 export default {
-  asyncData ({ store, route }) {
-    return store.dispatch('fetchItem', route.params.id);
+  asyncData ({ store, route, config }) {
+    config.params = {
+      id: route.params.id
+    };
+    return store.dispatch('fetchItem', config);
   },
   computed: {
     item () {

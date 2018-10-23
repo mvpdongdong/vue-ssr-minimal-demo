@@ -1,12 +1,14 @@
 import { axiosGet } from '../utils/request';
 
-export function fetchItem (id) {
+export function fetchItem (config) {
   return axiosGet({
-    url: '/api/v1/article/' + id
+    url: '/api/v1/article/' + config.params.id,
+    cookie: config.headers.cookie
   });
 }
-export function fetchList () {
+export function fetchList (config) {
   return axiosGet({
-    url: '/api/v1/article/'
+    url: '/api/v1/article/',
+    cookie: config.headers.cookie
   });
 }

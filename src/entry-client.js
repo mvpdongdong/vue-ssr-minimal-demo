@@ -15,7 +15,12 @@ Vue.mixin({
     if (asyncData) {
       asyncData({
         store: this.$store,
-        route: to
+        route: to,
+        config: {
+          headers: {
+            cookie: document.cookie
+          }
+        }
       }).then(next).catch(next);
     } else {
       next();
@@ -44,7 +49,12 @@ router.onReady(() => {
         if (component.asyncData) {
           component.asyncData({
             store,
-            route: to
+            route: to,
+            config: {
+              headers: {
+                cookie: document.cookie
+              }
+            }
           });
         }
       })

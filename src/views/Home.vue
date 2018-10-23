@@ -1,5 +1,7 @@
 <template>
   <div>
+    {{$store.state.foo.count}}
+    <demo></demo>
     <h3>文章列表</h3>
     <div class="list" v-for="i in list">
       <router-link :to="{path:'/item/'+i.id}">{{i.title}}</router-link>
@@ -7,15 +9,11 @@
   </div>
 </template>
 <script>
-import fooStoreModule from '../store/modules/foo';
+import Demo from '../components/demo';
 
 export default {
-  asyncData ({ store, route }) {
-    store.registerModule('foo', fooStoreModule);
-    return store.dispatch('fetchList');
-  },
-  destroyed () {
-    this.$store.unregisterModule('foo');
+  asyncData ({ store, route, config }) {
+    return store.dispatch('fetchList', config);
   },
   computed: {
     list () {
@@ -24,6 +22,9 @@ export default {
     fooCount () {
       return this.$store.state.foo.count;
     }
+  },
+  components: {
+    Demo
   }
 };
 </script>

@@ -1,5 +1,4 @@
 import { createApp } from './app';
-import cookieBus from './utils/cookieBus';
 
 export default (context) =>
   // 因为有可能会是异步路由钩子函数或组件，所以我们将返回一个 Promise，
@@ -7,7 +6,6 @@ export default (context) =>
   // 就已经准备就绪。
   new Promise((resolve, reject) => {
     const { app, router, store } = createApp(context);
-    cookieBus.$cookie = context.cookie;
 
     // 设置服务器端 router 的位置
     router.push(context.url);
@@ -26,7 +24,10 @@ export default (context) =>
           if (component.asyncData) {
             return component.asyncData({
               store,
-              route: router.currentRoute
+              route: router.currentRoute,
+              config: {
+                headers: context.cookie
+              }
             });
           }
         })
