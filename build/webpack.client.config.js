@@ -23,18 +23,18 @@ const config = merge(base, {
   ]
 });
 
-config.plugins.push(
-  // auto generate service worker
-  new SWPrecachePlugin({
-    cacheId: 'vue-ssr',
-    filename: 'service-worker.js',
-    minify: true,
-    dontCacheBustUrlsMatching: /\.\w{8}\./,
-    staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/]
-  })
-);
-
 if (isProd) {
+  config.plugins.push(
+    // auto generate service worker
+    new SWPrecachePlugin({
+      cacheId: 'vue-ssr',
+      filename: 'sw.js',
+      minify: true,
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/]
+    })
+  );
+
   config.optimization = {
     splitChunks: {
       cacheGroups: {
