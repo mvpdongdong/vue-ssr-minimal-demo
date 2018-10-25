@@ -7,6 +7,7 @@ const LRU = require('lru-cache');
 const microcache = require('route-cache');
 const morgan = require('morgan');
 const logger = morgan('dev');
+const favicon = require('serve-favicon');
 
 const { createBundleRenderer } = require('vue-server-renderer');
 const devServer = require('./build/setup-dev-server');
@@ -21,6 +22,7 @@ const serve = (path, cache) =>
   express.static(resolve(path), {
     maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
   });
+app.use(favicon('./public/favicon.ico'));
 app.use(serve('./dist', true));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -103,6 +105,8 @@ function render (req, res) {
 
   const context = {
     title: 'Vue SSR', // default title
+    description: 'Vue SSR description',
+    keywords: 'Vue SSR, Vue, Vuex',
     url: req.url,
     cookie: req.headers['cookie']
   };

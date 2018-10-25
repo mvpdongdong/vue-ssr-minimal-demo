@@ -47,7 +47,7 @@ router.onReady(() => {
     Promise.all(
       activated.map((component) => {
         if (component.asyncData) {
-          component.asyncData({
+          return component.asyncData({
             store,
             route: to,
             config: {

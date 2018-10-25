@@ -7,7 +7,17 @@
   </div>
 </template>
 <script>
+import headMixin from '../utils/headMixin';
+
 export default {
+  mixins: [headMixin],
+  head () {
+    return {
+      title: '文章列表',
+      keywords: 'Vue SSR, 文章列表',
+      description: 'Vue SSR文章列表'
+    };
+  },
   asyncData ({ store, route, config }) {
     return store.dispatch('fetchList', config);
   },
