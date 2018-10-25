@@ -36,7 +36,8 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-body h2 {
+h2 {
+  font-size: 20px;
   color: #e43;
 }
 </style>

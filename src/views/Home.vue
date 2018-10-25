@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>文章列表</h3>
+    <h2>文章列表</h2>
     <div class="list" v-for="i in list">
       <router-link :to="{path:'/item/'+i.id}">{{i.title}}</router-link>
     </div>
@@ -32,7 +32,8 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-body h3 {
-  color: #333;
+h2 {
+  font-size: 20px;
+  color: #e43;
 }
 </style>
