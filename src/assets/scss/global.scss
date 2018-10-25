@@ -1,0 +1,39 @@
+@import './reset.scss';
+/* global */
+body {
+  font-size: 12px;
+  line-height: 1.75em;
+  font-family: Helvetica, Tahoma, Arial, 'PingFang SC', 'Microsoft YaHei',
+    '微软雅黑';
+  _font-family: '\5B8B\4F53';
+  color: #333333;
+}
+
+/* link */
+a {
+  color: #333;
+  text-decoration: none;
+  outline: none;
+}
+a:hover {
+  color: #e43;
+  text-decoration: none;
+  outline: none;
+}
+
+/* 清除浮动 */
+.global-clearfix:after {
+  content: '.';
+  display: block;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  clear: both;
+}
+.global-clearfix {
+  zoom: 1;
+}
+.global-clear {
+  clear: both;
+}

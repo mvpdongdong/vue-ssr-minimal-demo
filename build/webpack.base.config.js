@@ -13,13 +13,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: 'http://localhost:9003/',
-    filename: isProd ?'[name].[chunkhash].js' : '[name].js'
+    filename: isProd ?'js/[name].[chunkhash].js' : 'js/[name].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.css', '.scss'],
     alias: {
       public: resolve('public'),
-      '@': resolve('src')
+      '~': resolve('src')
     }
   },
   module: {
@@ -52,7 +52,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: '[name].[ext]?[hash]'
+          name: isProd ? 'img/[name].[hash:7].[ext]' : 'img/[name].[ext]'
         }
       },
       {
@@ -79,6 +79,14 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 2048,
+          name: isProd ? 'fonts/[name].[hash:7].[ext]' : 'fonts/[name].[ext]'
+        }
+      }
     ]
   },
   plugins: [new VueLoaderPlugin()]
