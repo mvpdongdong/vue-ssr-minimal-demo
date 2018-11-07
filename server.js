@@ -22,6 +22,9 @@ const serve = (path, cache) =>
   express.static(resolve(path), {
     maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
   });
+app.use('/manifest.json', function (req, res) {
+  res.send(fs.readFileSync('./src/manifest.json'));
+});
 app.use(favicon('./public/favicon.ico'));
 app.use(serve('./dist', true));
 app.use(bodyParser.json());

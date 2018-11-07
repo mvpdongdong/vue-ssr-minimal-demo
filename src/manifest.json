@@ -1,0 +1,12 @@
+{
+  "short_name": "vue-ssr",
+  "name": "vue-ssr-minimal-demo",
+  "icons": [
+      {
+          "src": "http://d.lanrentuku.com/down/png/1610/creativetail-12-objects-icons-v1/lamp-2_128px.png",
+          "type": "image/png",
+          "sizes": "128x128"
+      }
+  ],
+  "start_url": "/"
+}
