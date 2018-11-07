@@ -31,7 +31,39 @@ if (isProd) {
       filename: 'sw.js',
       minify: true,
       dontCacheBustUrlsMatching: /\.\w{8}\./,
-      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/]
+      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/api.mimei.net.cn\/api\/*/,
+          handler: 'networkFirst',
+          options: {
+            cache: {
+              name: 'api',
+              maxEntries: 20,
+              maxAgeSeconds: 86400
+            }
+          }
+        },
+        {
+          urlPattern: /^http:\/\/localhost:9003\/item\/*|^http:\/\/localhost:9003$/,
+          handler: 'networkFirst',
+          options: {
+            cache: {
+              name: 'page'
+            }
+          }
+        },
+        {
+          urlPattern: /\.(png|jpg|gif|svg|ico)$/,
+          handler: 'cacheFirst',
+          options: {
+            cache: {
+              name: 'image',
+              maxAgeSeconds: 604800
+            }
+          }
+        }
+      ]
     })
   );
 

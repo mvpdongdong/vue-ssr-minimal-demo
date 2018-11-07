@@ -70,7 +70,7 @@ router.onReady(() => {
 });
 
 // service worker
-if (location.protocol === 'https:' && navigator.serviceWorker) {
+if (location.protocol === 'https:' || location.host === 'localhost:9003' && navigator.serviceWorker) {
   navigator.serviceWorker.register('/sw.js').then(() => {
     console.log('Service worker registered!');
   }).catch((err) => {
