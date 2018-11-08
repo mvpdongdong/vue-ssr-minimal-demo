@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-const Home = () => import('../views/Home.vue');
-const Item = () => import('../views/Item.vue');
-const notFound = () => import('../views/404.vue');
+const Home = () => import(/* webpackChunkName: "home" */ '../views/Home.vue');
+const Item = () => import(/* webpackChunkName: "item" */ '../views/Item.vue');
+const notFound = () => import(/* webpackChunkName: "404" */ '../views/404.vue');
 
 Vue.use(Router);
 
